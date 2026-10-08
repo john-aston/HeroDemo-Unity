@@ -1,0 +1,49 @@
+# ------------------------------------------------------------------
+# Unity 工程 .gitignore
+# 原则：Unity 生成的缓存/中间产物一律忽略；Assets/ 下的 *.meta 必须提交
+# ------------------------------------------------------------------
+
+# Unity 生成的缓存与中间目录
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]serSettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+ExportedObj/
+
+# Unity 自动生成的 IDE 工程文件（Unity 会重新生成，无需提交）
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+.vs/
+.idea/
+
+# 打包 / 导出产物
+*.apk
+*.aab
+*.unitypackage
+*.app
+crashlytics-build.properties
+sysinfo.txt
+
+# 操作系统
+.DS_Store
+
+# 注意：不要忽略 *.meta —— 缺少 .meta 会导致 Unity 资源引用丢失

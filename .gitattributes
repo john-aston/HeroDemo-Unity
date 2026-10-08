@@ -1,0 +1,34 @@
+# ------------------------------------------------------------------
+# 说明：本文件刻意不设置任何行尾（eol）转换策略。
+# 原因：现有 *.cs 源文件为 CRLF 行尾，一旦声明 eol=lf，git 会在
+#       下次 checkout 时静默改写源文件。为避免意外改动，这里只保留
+#       Unity 合并驱动与二进制标记。
+#       若将来想统一为 LF，加一行即可： *.cs text eol=lf
+# ------------------------------------------------------------------
+
+# Unity 的 YAML 资源文件：使用 Unity 官方 SmartMerge 合并，
+# 避免场景 / Prefab 冲突时只能整份二选一
+*.unity merge=unityyamlmerge
+*.prefab merge=unityyamlmerge
+*.asset merge=unityyamlmerge
+*.meta merge=unityyamlmerge
+
+# C# 源码使用 C# 语法高亮 diff（不改变文件内容与行尾）
+*.cs diff=csharp
+
+# 二进制资源：禁止 git 做文本处理与合并
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.psd binary
+*.tga binary
+*.wav binary
+*.mp3 binary
+*.ogg binary
+*.fbx binary
+*.ttf binary
+*.otf binary
+*.dll binary
+*.so binary
+*.dylib binary
