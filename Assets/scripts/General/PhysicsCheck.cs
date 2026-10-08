@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PhysicsCheck : MonoBehaviour
 {
-    [Header("¼ì²â²ÎÊı")]
+    [Header("æ£€æµ‹å‚æ•°")]
     public Vector2 bottomOffset;
 
     public float checkRaduis;
 
     public LayerMask groundlayer;
 
-    [Header("×´Ì¬")]
+    [Header("çŠ¶æ€")]
     public bool isGround;
     private void Update()
     {
@@ -20,7 +20,7 @@ public class PhysicsCheck : MonoBehaviour
 
     public void check()
     {
-        //¼ì²âµØÃæ
+        //æ£€æµ‹åœ°é¢
         isGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, checkRaduis, groundlayer);
     }
 

@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private PhysicsCheck PhysicsCheck;
 
     public Vector2 inputDirection;
-    [Header("»ù±¾²ÎÊı")]
+    [Header("åŸºæœ¬å‚æ•°")]
     public float speed;
     public float jumpforce;
     public PlayerAnimation playeranimation;
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         inputControl = new PlayerInputControl();
-        PhysicsCheck = GetComponent<PhysicsCheck>();//¶ÁÈ¡physicscheckÎÄ¼şµÄ´úÂë
+        PhysicsCheck = GetComponent<PhysicsCheck>();//è¯»å–physicscheckæ–‡ä»¶çš„ä»£ç 
         playeranimation = GetComponent<PlayerAnimation>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    //²âÊÔ
+    //æµ‹è¯•
 
 
 
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
-    //²âÊÔ
+    //æµ‹è¯•
    // private void OnTriggerStay2D(Collider2D other)
    //{
    //  Debug.Log(other.name);
@@ -86,14 +86,14 @@ public class PlayerController : MonoBehaviour
         if (inputDirection.x > 0) faceDir = 1;
 
         if (inputDirection.x < 0) faceDir = -1;
-        //ÈËÎï·­×ª
+        //äººç‰©ç¿»è½¬
         transform.localScale = new Vector3(faceDir , 1 , 1);
 
     }
 
     private void Jump(InputAction.CallbackContext context)
     {
-        //Debug.Log("jump");²âÊÔ´úÂëµÄ³£ÓÃ·½·¨
+        //Debug.Log("jump");æµ‹è¯•ä»£ç çš„å¸¸ç”¨æ–¹æ³•
 
         if(PhysicsCheck.isGround)
             rb.AddForce(transform.up * jumpforce, ForceMode2D.Impulse);

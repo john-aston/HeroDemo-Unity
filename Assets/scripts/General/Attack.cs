@@ -8,7 +8,7 @@ public class Attack : MonoBehaviour
     public float attackRange;
     public float attackRate;
 
-    [Header("Ö»¶ÔÄÄĞ©²ãÉúĞ§")]
+    [Header("åªå¯¹å“ªäº›å±‚ç”Ÿæ•ˆ")]
     public LayerMask targetLayers;
 
     private void OnTriggerEnter2D(Collider2D other)
