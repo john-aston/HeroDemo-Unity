@@ -41,8 +41,9 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetTrigger("hurt");
     }
 
-    public void PlayAttack()
+    public void PlayAttack(int step)
     {
-        anim.SetTrigger("attack");
+        anim.SetInteger("comboStep", step);   // 先写段数
+        anim.SetTrigger("attack");            // 再触发过渡
     }
 }

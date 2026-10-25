@@ -25,30 +25,46 @@ public class PlayerController : MonoBehaviour
     public bool isDead;
     public bool isAttack;
     
+    [Header("连招")]
+    public int comboStep;              // 当前连到第几段
+    public float comboWindow = 0.8f;   // 超过这么久没按攻击，就从第一段重新开始
+
+    private float lastAttackTime = -999f;
+    private Attack[] attackHitboxes;   // 三个攻击盒上的 Attack 组件
+    
     
     private void Awake()
     {
         inputControl = new PlayerInputControl();
-        PhysicsCheck = GetComponent<PhysicsCheck>();//读取physicscheck文件的代码
+        PhysicsCheck = GetComponent<PhysicsCheck>();
         playeranimation = GetComponent<PlayerAnimation>();
         rb = GetComponent<Rigidbody2D>();
 
+        // true = 连未激活的子物体一起找（Attack1/2/3 平时是关闭的）
+        attackHitboxes = GetComponentsInChildren<Attack>(true);
+
         inputControl.GamerPlay.Jump.started += Jump;
-
         inputControl.GamerPlay.Attack.started += PlayerAttack;
-
     }
 
     private void PlayerAttack(InputAction.CallbackContext context)
     {
-        playeranimation.PlayAttack();
+        // 1) 决定这次打第几段
+        if (Time.time - lastAttackTime > comboWindow)
+            comboStep = 1;                                    // 隔太久 → 重新从第一段起
+        else
+            comboStep = comboStep >= 3 ? 1 : comboStep + 1;    // 否则接下一段，三段后回到第一段
+
+        lastAttackTime = Time.time;
+
+        // 2) 开始新的一刀，清空命中记录（配合 Attack.cs 的 ResetHitRecord）
+        foreach (var hitbox in attackHitboxes)
+            hitbox.ResetHitRecord();
+
+        // 3) 播动画
+        playeranimation.PlayAttack(comboStep);
         isAttack = true;
-
     }
-
-
-    //测试
-
 
 
     private void OnEnable()
@@ -73,10 +89,10 @@ public class PlayerController : MonoBehaviour
     }
 
     //测试
-   // private void OnTriggerStay2D(Collider2D other)
-   //{
-   //  Debug.Log(other.name);
-   //}
+    // private void OnTriggerStay2D(Collider2D other)
+    //{
+    //  Debug.Log(other.name);
+    //}
 
     public void Move()
     {
